@@ -1,0 +1,81 @@
+@charset "utf-8";
+/* CSS Document */
+
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
+body {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+h1, h2, h3, h4 {
+	font-weight: normal;
+}
+img{
+	max-width:100%;
+	}
+.clr {
+	clear: both
+}
+.wrapper {
+	max-width: 600px;
+	margin: auto;
+	padding: 10px;
+	box-sizing: border-box;
+}
+.wrapper h1 {
+	color: #858585;
+	font-size: 22px;
+	font-weight: normal;
+	margin-top: 20px;
+	text-align: center;
+	margin-bottom: 26px;
+}
+.weather-detail-wrapper {
+	width: 175px;
+	height: 125px;
+	float: left;
+	margin-left: 15px;
+}
+.weather-detail-wrapper h2 {
+	background: #64a9c1;
+	font-size: 16px;
+	color: #fff;
+	padding: 5px 10px;
+	margin-bottom: 10px;
+	font-weight:bold;
+}
+.weather-img {
+	max-width: 64px;
+	width: 34%;
+	float: left;
+	padding-left: 5px;
+	box-sizing: border-box;
+}
+.weather-detail {
+	float: left;
+	width: 66%;
+}
+.weather-detail h3 {
+	color: #54565a;
+	font-size: 14px;
+	margin-bottom: 6px;
+}
+.weather-detail p {
+	color: #54565a;
+	font-size: 14px;
+}
+.weather-detail p strong {
+	font-weight:bold;
+}
+
+@media only screen and (max-width: 560px) {
+	.wrapper h1 {
+		font-size:18px;}
+	.weather-detail-wrapper{
+		width:100%;
+		margin-left:0px;
+		margin-bottom:20px;
+		}   /* phones */
+}
