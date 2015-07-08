@@ -74,7 +74,7 @@
 					var day = start_day.split("/");
 					
 					while (i < weatherData.length) { 
-						if(allow==false) {
+						if(allow===false) {
 							
 							/* In the JSON array, we need to find the day value that matches the day passed into the URL param */
 							allow = (weatherData[i].date.day==day[1]);
@@ -86,7 +86,7 @@
 								URL param does not match what is available in the 10 day forecast, the headline will not appear.
 							
 							*/
-							if (weatherData[i].date.day == day[1] ) {
+							if (weatherData[i].date.day === day[1] ) {
 								var city = '<h1>WEATHER FORECAST FOR ' + cityName.toUpperCase().split("_").join(" ") + '</h1>';
 								$(".city").html(city);
 							}
