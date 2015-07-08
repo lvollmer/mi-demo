@@ -18,6 +18,11 @@ http://www.wunderground.com/weather/api/d/docs?d=data/forecast10day
 
 * Lastly, when you send the completed assignment, please outline any gotchas that the end user may experience.  In other words, what instructions / explanations can you provide to ensure that the end user does not break what you've built?
 
+My Notes:
+* I put all of the javascript inside of the HTML file. I thought, for reviewing purposes, that it might be easier to follow along that way.
+* I put a lot of notes in the code so you could see where my head was at. 
+* If you don't feel like cloning this locally, you can see a working example here: http://s130859622.onlinehome.us/mi-demo/demo.html?zip_code=10933&date=07/14/2015
+
 My Gotchas:
 * It is important to stress that both a valid, 5 digit numeric zip code and valid date are required to be appended to the URL. The expected date format is MM/DD/YYYY. At the end of your HTML file, the user should append something like hello-world.html?zip_code=94597&date=07/07/2015
 
