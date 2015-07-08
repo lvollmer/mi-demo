@@ -22,12 +22,12 @@ My Gotchas:
 * It is important to stress that both a valid, 5 digit numeric zip code and valid date are required to be appended to the URL. The expected date format is MM/DD/YYYY. At the end of your HTML file, the user should append something like hello-world.html?zip_code=94597&date=07/07/2015
 
 * The order of the URL paramaters is very important. IE: the zip_code must be appended to the URL followed by the date, and not vice versa. 
--- INVALID: hello-world.html?date=07/07/2015&zip_code=94597
--- VALID: hello-world.html?zip_code=94597&date=07/07/2015
+**INVALID: hello-world.html?date=07/07/2015&zip_code=94597
+**VALID: hello-world.html?zip_code=94597&date=07/07/2015
 
 The 10 day forecast endoint does have contain any zip code data, so we have to first hit the geolookup end point with the zip code. This allows us to find the city name, and then we can use that city name to display the appropriate data from the 10 day forecast end point.
--- geolookup endpoint: http://www.wunderground.com/weather/api/d/docs?d=data/geolookup
--- forecast10day endpoint: http://www.wunderground.com/weather/api/d/docs?d=data/forecast10day
+* geolookup endpoint: http://www.wunderground.com/weather/api/d/docs?d=data/geolookup
+* forecast10day endpoint: http://www.wunderground.com/weather/api/d/docs?d=data/forecast10day
 
 * The 10 day forecast endpoint contains weather data starting from the present date and the following 9 days. If you enter a date paramater that fell before the present date, or a date greater than 10 days from now, the page will not render any HTML.
 
