@@ -24,41 +24,37 @@
 	return vars;
 	}
 		jQuery(document).ready(function($) {
-			
 			/* 
 				We need to grab the name of the city so that we can display the JSON data. 
 				You can't search the 10dayforecast endpoint by zip code, so we'll grab the
 				value of the zip_code from the URL, and use the geolocation endpoint to grab 
 				the city name.
 			*/
-			
 			var zip_code = getUrlVars()["zip_code"];
 			$.ajax({
 				url : "http://api.wunderground.com/api/e0d2b72c995eb908/geolookup/q/"+ zip_code +".json",
 				dataType : "jsonp",
 				success : function(parsed_zip) {
-					
-					/* Grab the city name from the geolookup endpoint. Replace spaces with an underscore, because the 
-					   forecast10day endpoint uses underscores between spaces in the request URL.
+					/* Grab the state and city name from the geolookup endpoint. Replace spaces with an underscore, because the 
+					   forecast10day endpoint uses underscores between spaces in the request URL for the city value.
 					   IE: /New_York.json, /San_Fransisco.json
+					   
 					   Edit: I just tested the request URL without using an underscore, and it still rendered JSON, 
 					   So this isn't completely necessary, but maybe it's good to be prudent
 					*/
-					
+					var stateName = parsed_zip.location.state;
 					var cityName = parsed_zip.location.city.replace(/ /g,"_");
-					getWeatherData(cityName);
+					getWeatherData(cityName,stateName);
 				}
 			});
 		});
-		
 		/*
-			Now that we have a city name, I can append that to a JSON URL and get the 10 day forecast for the appropriate city
+			Now that we have a city and state name, I can append that to a JSON URL and get the 10 day forecast for the appropriate city
 		*/
+		function getWeatherData(cityName,stateName) {
 
-		function getWeatherData(cityName) {
-
-			$.ajax({
-				url : "http://api.wunderground.com/api/e0d2b72c995eb908/forecast10day/q/CA/"+ cityName + ".json",
+			$.ajax({				
+				url : "http://api.wunderground.com/api/e0d2b72c995eb908/forecast10day/q/"+ stateName +"/"+ cityName +".json",
 				dataType : "jsonp",
 				success : function(parsed_location) {
 					var weatherData = parsed_location.forecast.simpleforecast.forecastday;
@@ -66,7 +62,6 @@
 					var i=0;					
 					var allow=false
 					var start_day= getUrlVars()["date"];
-					
 					/*
 						Albert said we can assume that the merged in date is some time within the next 10 days, and the format of the URL param will be MM/DD/YYYY.
 						Given that info, I will split the date variable up and grab the day value from the from the second array key (day[1]).
@@ -78,23 +73,23 @@
 							
 							/* In the JSON array, we need to find the day value that matches the day passed into the URL param */
 							allow = (weatherData[i].date.day==day[1]);
-
 							/* 
 								Below, we dynamically populate the city name into the <h1> field. We need to remove the underscores I added in the previous function. 
 								The output to HTML is in all caps. The creative had the text in all caps and the JSON value is camel cased.
 								The page should render blank if there is an error, so if the date value that the user entered in the 
 								URL param does not match what is available in the 10 day forecast, the headline will not appear.
-							
+								The spec didn't have a state name in the H1 tag, but I figured it couldn't hurt to add it.
 							*/
-							if (weatherData[i].date.day === day[1] ) {
-								var city = '<h1>WEATHER FORECAST FOR ' + cityName.toUpperCase().split("_").join(" ") + '</h1>';
+							if (weatherData[i].date.day == day[1] ) {
+								var city = '<h1>WEATHER FORECAST FOR ' + cityName.toUpperCase().split("_").join(" ") + ', ' + stateName.toUpperCase() +'</h1>';
 								$(".city").html(city);
 							}
 						}
 						
 						if(allow) {
-							// Loop through the rest of the array and display weather data for the rest of the days. Output the HTML.
-							
+							/*
+								Loop through the rest of the array and display weather data for the rest of the days. Output the HTML. 
+							*/
 							output += '<div class =  "weather-detail-wrapper">' 
 									  + '<h2>'+ weatherData[i].date.weekday + '</h2>'
 									  + '<div class="weather-img"><img src="' + weatherData[i].icon_url + '" alt="' + weatherData[i].conditions + '"/></div>'
