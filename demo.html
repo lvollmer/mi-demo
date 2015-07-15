@@ -93,7 +93,7 @@
 							output += '<div class =  "weather-detail-wrapper">' 
 									  + '<h2>'+ weatherData[i].date.weekday + '</h2>'
 									  + '<div class="weather-img"><img src="' + weatherData[i].icon_url + '" alt="' + weatherData[i].conditions + '"/></div>'
-									  + '<div class="weather-detail"><h3>'+ weatherData[i].conditions + '</h3><p>' + weatherData[i].high.fahrenheit + '<sup>&deg;</sup> / ' + weatherData[i].low.fahrenheit + '<sup>&deg;</sup> F</p></div></div>';
+									  + '<div class="weather-detail"><h3>'+ weatherData[i].conditions + '</h3><p><strong>' + weatherData[i].high.fahrenheit + '<sup>&deg;</sup></strong> / ' + weatherData[i].low.fahrenheit + '<sup>&deg;</sup> F</p></div></div>';
 						}
 						++i;
 					}					
